@@ -1,0 +1,75 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-content>
+        <h2>Put to Adoption</h2>
+        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+          <div fxFlex="30%" fxFlex.sm="95%" fxFlex.xs="95%">
+            <mat-tab-group>
+              <mat-tab label="Upload photo">
+                <app-upload-photo (getPhotoUrl)="getPhotoUrl($event)"></app-upload-photo>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+          <div fxFlex></div>
+          <div fxFlex="65%" fxFlex.sm="95%" fxFlex.xs="950%">
+            <mat-tab-group>
+              <mat-tab label="Pet Information">
+                <br/>
+                <form [formGroup]="petForm">
+                  <div fxLayout="row">
+                    <div fxFlex="40%" fxFlex.md="60%" fxFlex.sm="50%" fxFlex.xs="100%">
+                      <mat-form-field class="full-width">
+                        <input matInput placeholder="Pet name" formControlName="name"
+                               type="text">
+                        <mat-error *ngIf="petForm.controls['name'].hasError('required')">
+                          Please enter the pet name
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width">
+                        <input matInput placeholder="Description" formControlName="description"
+                               type="text">
+                        <mat-error *ngIf="petForm.controls['description'].hasError('required')">
+                          Please enter a description
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width">
+                        <mat-label>Age</mat-label>
+                        <br/>
+                        <mat-slider min="0" max="100" step="0.1" thumbLabel="true"
+                                    formControlName="age"></mat-slider>
+                        <input matInput placeholder="Age" type="text" hidden>
+                      </mat-form-field>
+
+                      <mat-form-field class="full-width">
+                        <mat-label>Category</mat-label>
+                        <br/>
+                        <mat-select formControlName="category">
+                          <mat-option value="DOG">Dog</mat-option>
+                          <mat-option value="CAT">Cat</mat-option>
+                          <mat-option value="BIRD">Bird</mat-option>
+                          <mat-option value="RABBIT">Rabbit</mat-option>
+                          <mat-option value="HAMSTER">Hamster</mat-option>
+                          <mat-option value="FISH">Fish</mat-option>
+                          <mat-option value="OTHER">Other</mat-option>
+                        </mat-select>
+                        <input matInput placeholder="Category" type="text" hidden>
+                      </mat-form-field>
+
+                      <button mat-raised-button color="primary"
+                              [disabled]="petForm.invalid || photoUrl === undefined" (click)="postAdoption()">
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

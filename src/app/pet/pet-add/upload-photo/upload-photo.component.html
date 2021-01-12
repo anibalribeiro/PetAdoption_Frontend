@@ -1,0 +1,19 @@
+<mat-form-field>
+  <div>
+    <input type="file" #fileInput id="uploadFile" (change)="fileProgress($event)" name="image"/>
+    <button mat-flat-button color="primary">Browse File</button>
+    <br/>
+    <mat-toolbar>
+      <div *ngIf="fileUploadProgress">
+        Upload progress: {{ fileUploadProgress }}
+      </div>
+      <div *ngIf="uploadedFilePath">
+        {{uploadedFilePath}}
+      </div>
+    </mat-toolbar>
+    <div class="img-preview" *ngIf="previewUrl">
+      <img [src]="previewUrl" height="280"/>
+    </div>
+    <input matInput type="text" hidden/>
+  </div>
+</mat-form-field>
