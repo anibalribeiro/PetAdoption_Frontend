@@ -11,7 +11,6 @@ const appRoutes: Routes = [
   {
     path: 'pet',
     loadChildren: './pet/pet.module#PetModule',
-    canActivate: [AuthGuard]
   },
   {
     path: 'account',
@@ -21,7 +20,6 @@ const appRoutes: Routes = [
   {
     path: 'about',
     loadChildren: './about/about.module#AboutModule',
-    canActivate: [AuthGuard]
   },
   {
     path: '**',

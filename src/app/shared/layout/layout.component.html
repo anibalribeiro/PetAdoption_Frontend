@@ -15,26 +15,48 @@
 
     <span class="navbar-spacer"></span>
 
-    <button mat-button [matMenuTriggerFor]="userMenu">
-      <mat-icon>person</mat-icon>
-      <span fxShow fxHide.xs>
-        {{username}}
-      </span>
-    </button>
-    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-
-      <a mat-menu-item [routerLink]="['/account/profile']">
+    <ng-template *ngIf="user; else login">
+      <button mat-button [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
-        <span>Account</span>
-      </a>
+        <span fxShow fxHide.xs>
+          {{user.username}}
+        </span>
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
 
-      <a mat-menu-item [routerLink]="['/auth/login']">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Log out</span>
-      </a>
+        <a mat-menu-item [routerLink]="['/account/profile']">
+          <mat-icon>person</mat-icon>
+          <span>Account</span>
+        </a>
 
-    </mat-menu>
+        <a mat-menu-item [routerLink]="['/auth/login']">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Log out</span>
+        </a>
 
+      </mat-menu>
+    </ng-template>
+    <ng-template #login>
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
+        <span fxShow fxHide.xs>
+          Login
+        </span>
+      </button>
+      <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+
+        <a mat-menu-item [routerLink]="['/auth/login']">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </a>
+
+        <a mat-menu-item [routerLink]="['/auth/signup']">
+          <mat-icon>account_circle</mat-icon>
+          <span>Sign up</span>
+        </a>
+
+      </mat-menu>
+    </ng-template>
   </mat-toolbar>
 
   <mat-sidenav-container class="navbar-sidenav-container">
@@ -59,15 +81,17 @@
           <p mat-line> Put to Adoption </p>
         </a>
 
-        <a mat-list-item [routerLink]="['/account/profile']">
-          <mat-icon mat-list-icon>person</mat-icon>
-          <p mat-line> Account </p>
-        </a>
+        <ng-container *ngIf="user">
+          <a mat-list-item [routerLink]="['/account/profile']">
+            <mat-icon mat-list-icon>person</mat-icon>
+            <p mat-line> Account </p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/auth/login']">
-          <mat-icon mat-list-icon>exit_to_app</mat-icon>
-          <p mat-line> Log out </p>
-        </a>
+          <a mat-list-item [routerLink]="['/auth/login']">
+            <mat-icon mat-list-icon>exit_to_app</mat-icon>
+            <p mat-line> Log out </p>
+          </a>
+        </ng-container>
 
         <mat-divider></mat-divider>
 
